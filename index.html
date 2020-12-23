@@ -7,16 +7,70 @@
     <script src="node_modules/react/umd/react.development.js"></script>
     <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
     <script src="node_modules/babel-standalone/babel.min.js"></script>
+    <style>
+        .c-g{
+            color: green;
+        }
+    </style>
 </head>
 <body>
-    <div id="demo">
-
-    </div>
-
+    <div id="testjsx_js"></div>
+    <div id="demo"></div>
+    <div id="demo2"></div>
 </body>
+<!-- vscode 下載 Live Server 以免cors-->
+<script src="js/jsx.js" type="text/babel"></script>
 <script type="text/babel">
-    let dom1 = <h1>hello</h1>;
-    ReactDOM.render(dom1,document.getElementById('demo'));
+    // JSX type="text/babel" 必須
+    let text = "jason"
+    let age = 10
+    var arr = [
+        <li>li</li>,
+        <li>li</li>
+    ]
+    var arr2 = [
+        "吃飯",
+        "睡覺",
+        "打咚咚"
+    ]
+    // background-color -> backgroundColor
+    let c_r = {color:"red",border:"1px solid black",backgroundColor:"yellow"}
+    let dom1 = 
+        //必須要父標籤包裹
+        <div>
+            <h1>
+            hello
+            {/*我是注釋*/}
+            </h1>
+            {/*使用表達式,用{}*/}
+            <div>
+                my name is {text},age is {age+1}
+            </div>
+            {/*引用js/jsx.js*/}
+            <div>
+                my name is {intro({name:"AAAA"})}
+            </div>
+            {/*數組*/}
+            <ul>
+                {arr}
+            </ul>
+            {/*屬性設置*/}
+            <span style={c_r}>屬性設置</span>
+            {/*class -> className*/}
+            <span className="c-g">c-g</span>
+          
+        </div>;
+    /*列表 map ,在react中渲染數組要有唯一key值*/
+    /*click事件 用箭頭函數*/
+    let dom4 = arr2.map((item,index)=>{
+                return <li key={index} onClick={(e)=>{
+                    console.log(item)
+                    console.log(this)
+                }}>{item}</li>
+            })
+        
     
+    ReactDOM.render(dom1,document.getElementById('demo'));
+    ReactDOM.render(dom4,document.getElementById('demo2'));
 </script>
 </html>
