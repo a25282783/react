@@ -20,11 +20,12 @@
     <div id="testjsx_js"></div>
     <div id="demo"></div>
     <div id="demo2"></div>
+    <div id="demo3"></div>
 </body>
 <!-- vscode 下載 Live Server 以免cors-->
 <script src="js/jsx.js" type="text/babel"></script>
 <script type="text/babel">
-    // JSX type="text/babel" 必須
+    // JSX 必須加type="text/babel" 
     let text = "jason"
     let age = 10
     var arr = [
@@ -36,6 +37,11 @@
         "睡覺",
         "打咚咚"
     ]
+    var obj = {
+        a:"吃飯",
+        b:"睡覺",
+        c:"打咚咚"
+    }
     // background-color -> backgroundColor
     let c_r = {color:"red",border:"1px solid black",backgroundColor:"yellow"}
     let dom1 = 
@@ -68,12 +74,29 @@
     let dom4 = arr2.map((item,index)=>{
                 return <li key={index} onClick={(e)=>{
                     console.log(item)
-                    console.log(this)
                 }}>{item}</li>
             })
-        
+    /*組件*/
+    function CompA(){
+        return <span>我是子組件</span>
+    }
+    function  Comp() {
+        return <div>我是無狀態組件<CompA/></div>
+    }
+    let dom5 = <div>
+        {
+            /*遍歷物件*/
+            Object.keys(obj).map((k,i)=>{
+                return <span>key:{k}-----value:{obj[k]},</span>
+            })
+        }
+        {/*必須大寫*/}
+        <Comp/>
+        </div>
+
     
     ReactDOM.render(dom1,document.getElementById('demo'));
     ReactDOM.render(dom4,document.getElementById('demo2'));
+    ReactDOM.render(dom5,document.getElementById('demo3'));
 </script>
 </html>
