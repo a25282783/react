@@ -76,12 +76,18 @@
                     console.log(item)
                 }}>{item}</li>
             })
-    /*組件*/
+    /*函數組件*/
     function CompA(){
         return <span>我是子組件</span>
     }
     function  Comp() {
         return <div>我是無狀態組件<CompA/></div>
+    }
+    /*類組件*/
+    class ClassComp extends React.Component{
+        render() {
+            return <div>類組件</div>
+        }
     }
     let dom5 = <div>
         {
@@ -91,7 +97,7 @@
             })
         }
         {/*必須大寫*/}
-        <Comp/>
+        <Comp/><ClassComp/>
         </div>
 
     
