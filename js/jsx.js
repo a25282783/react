@@ -5,3 +5,7 @@ function intro(obj){
 let dom3 = <div>我在jsx.js裡面</div>;
 
 ReactDOM.render(dom3,document.getElementById('testjsx_js'));
+
+
+
+

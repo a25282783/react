@@ -9,7 +9,7 @@
     <script src="node_modules/babel-standalone/babel.min.js"></script> -->
     <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script crossorigin src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <style>
         .c-g{
             color: green;
@@ -42,6 +42,7 @@
         b:"睡覺",
         c:"打咚咚"
     }
+
     // background-color -> backgroundColor
     let c_r = {color:"red",border:"1px solid black",backgroundColor:"yellow"}
     let dom1 = 
@@ -80,13 +81,28 @@
     function CompA(){
         return <span>我是子組件</span>
     }
-    function  Comp() {
-        return <div>我是無狀態組件<CompA/></div>
+    /*porps 是組件對外接口，組件不能修改自身porps
+    * return jsx 分行要加括號
+    */
+    function  Comp(props) {
+        return (
+            <div>我是無狀態組件
+                <CompA/>
+                <span className={props.className}>props:{props.msg}--default:{props.default}</span>
+            </div>
+        )
     }
+    /*組件props默認值*/
+    Comp.defaultProps={msg:"部會出現",default:"默認值"}
     /*類組件*/
     class ClassComp extends React.Component{
         render() {
-            return <div>類組件</div>
+            return (
+                <div>
+                    <span> 類組件</span>
+                    <span className={this.props.className}>props:{this.props.msg}</span>
+                </div>
+            )
         }
     }
     let dom5 = <div>
@@ -96,8 +112,11 @@
                 return <span>key:{k}-----value:{obj[k]},</span>
             })
         }
-        {/*必須大寫*/}
-        <Comp/><ClassComp/>
+        {/*組件必須大寫開頭*/}
+        <Comp className="c-g" msg="hi,props"/>
+        <Comp {...{className:"c-g",msg:"hi,props"}}/>
+        <ClassComp className="c-g" msg="hi,props"/>
+        <ClassComp {...{className:"c-g",msg:"hi,props"}}/>
         </div>
 
     
