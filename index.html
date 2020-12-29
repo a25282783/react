@@ -21,6 +21,7 @@
     <div id="demo"></div>
     <div id="demo2"></div>
     <div id="demo3"></div>
+    <div id="demo4"></div>
 </body>
 <!-- vscode 下載 Live Server 以免cors-->
 <script src="js/jsx.js" type="text/babel"></script>
@@ -105,6 +106,7 @@
             )
         }
     }
+
     let dom5 = <div>
         {
             /*遍歷物件*/
@@ -119,9 +121,86 @@
         <ClassComp {...{className:"c-g",msg:"hi,props"}}/>
         </div>
 
+    // state 狀態
+    // props 是組件對外的接口，state 是組件對內的接口
+    // 主要區別:state可變，props只讀，如果想修改props中數據，則修改傳給當前組件數據的父組件
+    // 狀態改變了，DOM自動更新
+    // 如果要使用狀態，不能使用無狀態組件
+    class Com extends React.Component{
+        constructor(props){
+            // 必須在super中寫上props
+            super(props)
+            // 定義state
+            this.state={
+                name:'哈哈',
+                bool:true
+            }
+        }
+        func = () =>{
+            this.setState({bool:!this.state.bool})
+        };
+        render(){
+            return (
+                // 修改一定要調用this.setState({key:value},callback()) 異步
+                <div>my name is {(this.state.bool)?'哈哈':'哭哭'}<button onClick={this.func}>click</button></div>
+            )
+        }
+    }
     
+    // 轉發refs 不能在無狀態組件使用
+    // ref 使用方式
+    // 1.字串
+    // 2.回調
+    // 3.React.createRef()
+    class Com2 extends React.Component{
+        func = () =>{
+            alert(this.refs.input.value)
+        };
+        func2 = () =>{
+            alert(this.input2.value)
+        };
+        render(){
+            return (
+                <div>
+                    <Com/>
+                    {/*字串*/}
+                    <input type="text" placeholder="輸入" ref="input"/>
+                    <button onClick={this.func}>click</button>
+                    {/*回調*/}
+                    <input type="text" placeholder="輸入" ref={(input2)=>{this.input2 = input2}}/>
+                    <button onClick={this.func2}>click</button>
+                </div>
+            )
+        }
+    }
+
+    // 事件處理 小駝峰命名 綁定函數不能加()否則立即執行
+    class Com3 extends React.Component{
+        constructor(props){
+            super(props)
+        }
+        func(i,e){
+            console.log(i,e)
+        }
+        func2=(i)=>{
+            console.log(i)
+        }
+        render(){
+            return (
+                <div>
+                    <Com2/>
+                    <button onClick={(e)=>{this.func("按鈕1",e)}}>按鈕1</button>
+                    <button onClick={this.func2.bind(this,"按鈕2")}>按鈕2</button>
+                </div>
+            )
+        }
+    }
+
+    // 共用數據
+
     ReactDOM.render(dom1,document.getElementById('demo'));
     ReactDOM.render(dom4,document.getElementById('demo2'));
     ReactDOM.render(dom5,document.getElementById('demo3'));
+    ReactDOM.render(<Com3/>,document.getElementById('demo4'));
 </script>
 </html>
