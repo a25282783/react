@@ -197,10 +197,22 @@
     }
 
     // 共用數據
+    class Com4 extends React.Component{
+        constructor(props){
+            super(props)
+        }
+        render(){
+            return (
+                <div>
+                    <Com3/>    
+                </div>
+            )
+        }
+    }
 
     ReactDOM.render(dom1,document.getElementById('demo'));
     ReactDOM.render(dom4,document.getElementById('demo2'));
     ReactDOM.render(dom5,document.getElementById('demo3'));
-    ReactDOM.render(<Com3/>,document.getElementById('demo4'));
+    ReactDOM.render(<Com4/>,document.getElementById('demo4'));
 </script>
 </html>
