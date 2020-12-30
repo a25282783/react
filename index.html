@@ -185,26 +185,63 @@
         func2=(i)=>{
             console.log(i)
         }
+        func3=()=>{
+            console.log('i')
+        }
         render(){
             return (
                 <div>
                     <Com2/>
                     <button onClick={(e)=>{this.func("按鈕1",e)}}>按鈕1</button>
                     <button onClick={this.func2.bind(this,"按鈕2")}>按鈕2</button>
+                    <button onClick={this.func3}>按鈕2</button>
                 </div>
             )
         }
     }
 
-    // 共用數據
-    class Com4 extends React.Component{
+    // 共用數據，狀態提升
+    class ComA extends React.Component{
         constructor(props){
             super(props)
         }
         render(){
             return (
                 <div>
-                    <Com3/>    
+                    {this.props.text}  
+                </div>
+            )
+        }
+    }
+    class ComB extends React.Component{
+        constructor(props){
+            super(props)
+        }
+        render(){
+            return (
+                <div>
+                    {this.props.text}  
+                </div>
+            )
+        }
+    }
+    class ComAB extends React.Component{
+        constructor(props){
+            super(props)
+            this.state = {
+                comtext:"text"
+            }
+        }
+        func(){
+            this.setState({
+                comtext:"text2"
+            })
+        }
+        render(){
+            return (
+                <div>
+                    <ComA text={this.state.comtext} onClick={this.func}/>
+                    <ComB text={this.state.comtext} onClick={this.func}/>    
                 </div>
             )
         }
