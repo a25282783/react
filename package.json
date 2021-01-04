@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/a25282783/react#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "babel-standalone": "^6.26.0",
     "create-react-app": "^4.0.1",
     "react": "^17.0.1",

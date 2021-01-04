@@ -180,13 +180,13 @@
             super(props)
         }
         func(i,e){
-            console.log(i,e)
+            console.log(i,e,this)
         }
         func2=(i)=>{
-            console.log(i)
+            console.log(i,this)
         }
         func3=()=>{
-            console.log('i')
+            console.log('i',this)
         }
         render(){
             return (
@@ -250,6 +250,6 @@
     ReactDOM.render(dom1,document.getElementById('demo'));
     ReactDOM.render(dom4,document.getElementById('demo2'));
     ReactDOM.render(dom5,document.getElementById('demo3'));
-    ReactDOM.render(<Com4/>,document.getElementById('demo4'));
+    ReactDOM.render(<Com3/>,document.getElementById('demo4'));
 </script>
 </html>

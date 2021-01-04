@@ -1,3 +1,14 @@
-1.npm install -g create-react-app
-2.cd [dir] , create-react-app [project-name]
-3.cd [project-name], npm start
+create-react-app:
+    腳手架
+    1.npm install -g create-react-app
+    2.cd [dir] , create-react-app [project-name]
+    3.cd [project-name], npm start ---->監聽3000port
+    4. rcc ---->自動生成react 代碼
+
+json-server:
+    模擬數據
+    1.npm install -g json-server
+    
+axios:
+    客戶端請求
+    1.npm install --save axios
